@@ -10,3 +10,4 @@
     #J[0].set_data(jxdata,jydata)
     #J[1].set_data(jxlist[k],jylist[k])
     #J[2].set_position((jxlist[k],jylist[k]))
+    #damn boy
