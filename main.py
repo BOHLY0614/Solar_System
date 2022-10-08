@@ -46,7 +46,7 @@ maxdata,maydata=[],[]
 jxdata,jydata=[],[]
 
 stock_coord=[T,Ma,J]
-stock_modifpos=[exlist,eylist,maxlist,maxlist,jxlist,jxlist]
+stock_modifpos=[exlist,eylist,maxlist,maylist,jxlist,jylist]
 stock_trace=[exdata,eydata,maxdata,maydata,jxdata,jydata]
 print(planete.counter)
 def animate(k):
