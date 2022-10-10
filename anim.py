@@ -7,3 +7,9 @@ def casP(a,ax):
     figure, =ax.plot([a.x], [0], marker='o', markersize=a.size, markerfacecolor=a.color)
     descr=ax.text(a.x, 0, a.nom)
     return trace,figure,descr
+
+def casPS(a,b,ax):
+    trace, =ax.plot([],[],color=a.color)
+    figure, =ax.plot([a.x+b.x], [0], marker='o', markersize=a.size, markerfacecolor=a.color)
+    descr=ax.text(a.x+b.x, 0, a.nom)
+    return trace,figure,descr

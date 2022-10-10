@@ -30,9 +30,7 @@ def actu(a,b):
     a.vy+=(f[1]*delta_t)/a.masse
     a.x+=a.vx*delta_t
     a.y+=a.vy*delta_t
-    return a.x,a.y,a.vx,a.vy
-
-
+    return a.x,a.y
 
 
 

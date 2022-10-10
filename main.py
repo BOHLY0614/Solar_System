@@ -6,25 +6,26 @@ from List import *
 from calculs import *
 from constantes import *
 from anim import *
+import numpy as np
 
 #Initialisation
-exlist,eylist=[],[]
-maxlist,maylist=[],[]
-jxlist,jylist=[],[]
+earth_xlist,earth_ylist=[],[]
+mars_xlist,mars_ylist=[],[]
+jupiter_xlist,jupiter_ylist=[],[]
 p=0
 
 #Calcul des positions (ici que de la terre on va négliger le déplacement du mouvement pour l'instant)
 t=0
 while t<4380*delta_t:
     update_e=actu(earth,sun)
-    exlist.append(update_e[0])
-    eylist.append(update_e[1])
+    earth_xlist.append(update_e[0])
+    earth_ylist.append(update_e[1])
     update_ma=actu(mars,sun)
-    maxlist.append(update_ma[0])
-    maylist.append(update_ma[1])
+    mars_xlist.append(update_ma[0])
+    mars_ylist.append(update_ma[1])
     update_j=actu(jupiter,sun)
-    jxlist.append(update_j[0])
-    jylist.append(update_j[1])
+    jupiter_xlist.append(update_j[0])
+    jupiter_ylist.append(update_j[1])
 
     t+=delta_t
 
@@ -36,30 +37,29 @@ fig, ax = plt.subplots(figsize=(10,10))
 ax.set_aspect('equal')
 ax.grid()
 #Initialisation des paramètres de tracés
-T=casP(earth,ax)
-Ma=casP(mars,ax)
-J=casP(jupiter,ax)
+earth_plot=casP(earth,ax)
+mars_plot=casP(mars,ax)
+jupiter_plot=casP(jupiter,ax)
 figure_s, =ax.plot([],[],marker="o",markersize=15,markerfacecolor='yellow')
 descr_s=ax.text(0,0,"Soleil")
-exdata,eydata=[],[]
-maxdata,maydata=[],[]
-jxdata,jydata=[],[]
+earth_xdata,earth_ydata=[],[]
+mars_xdata,mars_ydata=[],[]
+jupiter_xdata,jupiter_ydata=[],[]
 
-stock_coord=[T,Ma,J]
-stock_modifpos=[exlist,eylist,maxlist,maylist,jxlist,jylist]
-stock_trace=[exdata,eydata,maxdata,maydata,jxdata,jydata]
-print(planete.counter)
+stock_coord=[earth_plot,mars_plot,jupiter_plot]
+stock_modifpos=[earth_xlist,earth_ylist,mars_xlist,mars_ylist,jupiter_xlist,jupiter_ylist]
+stock_trace=[earth_xdata,earth_ydata,mars_xdata,mars_ydata,jupiter_xdata,jupiter_ydata]
 def animate(k):
     n=0
     a=[]
 
     #On stock les données pour le tracé
-    exdata.append(exlist[k])
-    eydata.append(eylist[k])
-    maxdata.append(maxlist[k])
-    maydata.append(maylist[k])
-    jxdata.append(jxlist[k])
-    jydata.append(jylist[k])
+    earth_xdata.append(earth_xlist[k])
+    earth_ydata.append(earth_ylist[k])
+    mars_xdata.append(mars_xlist[k])
+    mars_ydata.append(mars_ylist[k])
+    jupiter_xdata.append(jupiter_xlist[k])
+    jupiter_ydata.append(jupiter_ylist[k])
 
     #cas des astres en mouvements
     for i in range(planete.counter-1):
@@ -71,6 +71,8 @@ def animate(k):
         a.append(stock_coord[i][2])
         n+=2
     #cas du soleil
+    figure_s.set_data(0,0)
+    descr_s.set_position((0,0))
 
     ax.axis('equal')
     ax.set_xlim(-8*earth.x,8*earth.x)
@@ -78,6 +80,6 @@ def animate(k):
     return tuple(a)
 
 while p==0:
-    ani = animation.FuncAnimation(fig=fig, func=animate, frames=len(exlist), interval=1,blit=True,repeat=False)
+    ani = animation.FuncAnimation(fig=fig, func=animate, frames=len(earth_xlist), interval=1,blit=True,repeat=False)
     plt.show()
     ani.frame_seq = ani.new_frame_seq()
